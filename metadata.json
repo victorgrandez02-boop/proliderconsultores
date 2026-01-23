@@ -1,0 +1,8 @@
+{
+  "name": "Prolider Consultores",
+  "description": "Plataforma especializada en Capacitación de Psicología-Educación y Salud Mental, ofreciendo servicios de clases online, presenciales y atención psicológica.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
