@@ -1,14 +1,13 @@
 
 import React from 'react';
 import { BRAND } from '../constants';
-import { ViewType } from '../App';
 
 interface FooterProps {
-  navigateTo: (view: ViewType) => void;
+  navigateTo: (view: 'home' | 'certificates') => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({ navigateTo }) => {
-  const handleLink = (e: React.MouseEvent, view: ViewType) => {
+  const handleLink = (e: React.MouseEvent, view: 'home' | 'certificates') => {
     e.preventDefault();
     navigateTo(view);
   };

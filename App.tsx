@@ -7,7 +7,6 @@ import { About } from './components/About';
 import { Certificates } from './components/Certificates';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
-import { Chatbot } from './components/Chatbot';
 
 export type ViewType = 'home' | 'certificates';
 
@@ -33,6 +32,11 @@ const App: React.FC = () => {
   const navigateTo = (view: ViewType) => {
     setCurrentView(view);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (view === 'home') {
+      window.location.hash = '';
+    } else {
+      window.location.hash = '#certificados';
+    }
   };
 
   return (
@@ -55,7 +59,6 @@ const App: React.FC = () => {
       </main>
 
       <Footer navigateTo={navigateTo} />
-      <Chatbot />
     </div>
   );
 };

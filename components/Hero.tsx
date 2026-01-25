@@ -74,14 +74,8 @@ export const Hero: React.FC = () => {
               rel="noopener noreferrer"
               className="bg-brand-orange hover:bg-orange-600 text-white px-10 py-5 rounded-2xl font-bold text-xl shadow-2xl shadow-orange-900/30 transition-all flex items-center justify-center space-x-3 group"
             >
-              <span>Empezar ahora</span>
+              <span>Sabe más</span>
               <i className="fa-solid fa-arrow-right transition-transform group-hover:translate-x-2"></i>
-            </a>
-            <a 
-              href="#servicios"
-              className="bg-white/10 backdrop-blur-md hover:bg-white/20 text-white border border-white/20 px-10 py-5 rounded-2xl font-bold text-xl transition-all text-center"
-            >
-              Ver Servicios
             </a>
           </div>
         </div>

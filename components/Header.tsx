@@ -1,11 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { BRAND } from '../constants';
-import { ViewType } from '../App';
 
 interface HeaderProps {
-  currentView: ViewType;
-  navigateTo: (view: ViewType) => void;
+  currentView: 'home' | 'certificates';
+  navigateTo: (view: 'home' | 'certificates') => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({ currentView, navigateTo }) => {
@@ -26,9 +25,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, navigateTo }) => {
       navigateTo('certificates');
     } else {
       if (currentView !== 'home') {
-        // Si estamos en certificados y queremos ir a una sección de inicio
         navigateTo('home');
-        // El scroll se manejará automáticamente por el ID una vez renderizado
       }
     }
     setIsMobileMenuOpen(false);
