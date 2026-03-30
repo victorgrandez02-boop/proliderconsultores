@@ -7,7 +7,7 @@ interface HeaderProps {
   navigateTo: (view: 'home' | 'certificates') => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ currentView, navigateTo }) => {
+export const Header: React.FC<HeaderProps> = ({ navigateTo }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -19,32 +19,32 @@ export const Header: React.FC<HeaderProps> = ({ currentView, navigateTo }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavLink = (e: React.MouseEvent<HTMLAnchorElement>, href: string, isTab: boolean) => {
-    if (isTab) {
+  const handleNavLink = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href === '#') {
+      e.preventDefault();
+      navigateTo('home');
+    } else if (href === '#certificados') {
       e.preventDefault();
       navigateTo('certificates');
-    } else {
-      if (currentView !== 'home') {
-        navigateTo('home');
-      }
     }
+    // Para otros hashes, el navegador manejará el scroll-smooth de forma nativa por el id
     setIsMobileMenuOpen(false);
   };
 
   const navLinks = [
-    { name: 'Inicio', href: '#', isTab: false },
-    { name: 'Servicios', href: '#servicios', isTab: false },
-    { name: 'Certificados', href: '#certificados', isTab: true },
-    { name: 'Nosotros', href: '#nosotros', isTab: false },
-    { name: 'Contacto', href: '#contacto', isTab: false },
+    { name: 'Inicio', href: '#' },
+    { name: 'Servicios', href: '#servicios' },
+    { name: 'Certificados', href: '#certificados' },
+    { name: 'Nosotros', href: '#nosotros' },
+    { name: 'Contacto', href: '#contacto' },
   ];
 
-  const logoColorClass = isScrolled || currentView === 'certificates' ? 'text-brand-blue' : 'text-slate-800 md:text-white';
+  const logoColorClass = isScrolled ? 'text-brand-blue' : 'text-slate-800 md:text-white';
 
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled || currentView === 'certificates' ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'
+        isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'
       }`}
     >
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
@@ -57,7 +57,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, navigateTo }) => {
               lider
             </span>
           </div>
-          <div className={`text-[10px] font-bold tracking-[0.3em] uppercase mt-0.5 ${isScrolled || currentView === 'certificates' ? 'text-brand-blue' : 'text-slate-600 md:text-blue-100/90'}`}>
+          <div className={`text-[10px] font-bold tracking-[0.3em] uppercase mt-0.5 ${isScrolled ? 'text-brand-blue' : 'text-slate-600 md:text-blue-100/90'}`}>
             CONSULTORES
           </div>
         </button>
@@ -68,16 +68,16 @@ export const Header: React.FC<HeaderProps> = ({ currentView, navigateTo }) => {
             <a
               key={link.name}
               href={link.href}
-              onClick={(e) => handleNavLink(e, link.href, link.isTab)}
+              onClick={(e) => handleNavLink(e, link.href)}
               className={`font-medium transition-colors hover:text-brand-orange ${
-                isScrolled || currentView === 'certificates' ? 'text-slate-600' : 'text-white'
-              } ${currentView === 'certificates' && link.isTab ? 'text-brand-orange' : ''}`}
+                isScrolled ? 'text-slate-600' : 'text-white'
+              }`}
             >
               {link.name}
             </a>
           ))}
           <a 
-            href={`https://wa.me/51${BRAND.contact.phone}`}
+            href="https://aula.proliderconsultores.com/escritorio/"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-brand-orange text-white px-6 py-2 rounded-full font-semibold shadow-lg hover:bg-orange-600 transition-all transform hover:-translate-y-1"
@@ -91,7 +91,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, navigateTo }) => {
           className="md:hidden p-2 text-slate-800"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
-          <i className={`fa-solid ${isMobileMenuOpen ? 'fa-xmark' : 'fa-bars'} text-2xl ${!(isScrolled || currentView === 'certificates') && !isMobileMenuOpen ? 'text-white' : 'text-brand-blue'}`}></i>
+          <i className={`fa-solid ${isMobileMenuOpen ? 'fa-xmark' : 'fa-bars'} text-2xl ${!isScrolled && !isMobileMenuOpen ? 'text-white' : 'text-brand-blue'}`}></i>
         </button>
       </div>
 
@@ -102,14 +102,14 @@ export const Header: React.FC<HeaderProps> = ({ currentView, navigateTo }) => {
             <a
               key={link.name}
               href={link.href}
-              onClick={(e) => handleNavLink(e, link.href, link.isTab)}
-              className={`text-lg font-medium hover:text-brand-blue ${currentView === 'certificates' && link.isTab ? 'text-brand-orange' : 'text-slate-600'}`}
+              onClick={(e) => handleNavLink(e, link.href)}
+              className="text-lg font-medium hover:text-brand-blue text-slate-600"
             >
               {link.name}
             </a>
           ))}
           <a 
-            href={`https://wa.me/51${BRAND.contact.phone}`}
+            href="https://aula.proliderconsultores.com/escritorio/"
             className="bg-brand-blue text-white px-6 py-3 rounded-xl font-bold text-center"
           >
             Campus Virtual

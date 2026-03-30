@@ -1,47 +1,489 @@
 
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Prolider Consultores - Capacitación Psicológica</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              brand: {
-                blue: '#00619B',
-                orange: '#F16624',
-                dark: '#1e293b',
-              }
-            },
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-              display: ['Poppins', 'sans-serif'],
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prolider Consultores - Capacitación Psicológica</title>
+  
+  <!-- CSS 404 Resolution -->
+  <link rel="stylesheet" href="index.css">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              blue: '#00619B',
+              orange: '#F16624',
+              dark: '#1e293b',
             }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Poppins', 'sans-serif'],
           }
         }
       }
-    </script>
+    }
+  </script>
+  
+  <style>
+    .animate-fade-in { animation: fadeIn 0.5s ease-out; }
+    .animate-fade-in-up { animation: fadeInUp 0.5s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .hidden { display: none; }
+  </style>
+
   <script type="importmap">
 {
   "imports": {
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "react": "https://esm.sh/react@^19.2.3",
-    "@google/genai": "https://esm.sh/@google/genai@^1.38.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "xlsx": "https://esm.sh/xlsx@0.18.5"
+    "xlsx": "https://esm.sh/xlsx@0.18.5",
+    "react": "https://esm.sh/react@^19.2.4",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.38.0"
   }
 }
 </script>
+<link rel="stylesheet" href="/index.css">
 </head>
-  <body class="bg-slate-50 text-slate-900 overflow-x-hidden">
-    <div id="root"></div>
-  </body>
+<body class="bg-slate-50 text-slate-900 overflow-x-hidden">
+
+  <!-- Header -->
+  <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4">
+    <div class="container mx-auto px-4 md:px-6 flex justify-between items-center">
+      <a href="#" id="logo-btn" class="flex flex-col group transition-transform hover:scale-105">
+        <div class="flex items-baseline">
+          <span class="logo-pro font-display font-bold text-3xl tracking-tight leading-none text-slate-800 md:text-white">Pro</span>
+          <span class="font-display font-bold text-3xl tracking-tight leading-none text-brand-orange">lider</span>
+        </div>
+        <div class="logo-sub text-[10px] font-bold tracking-[0.3em] uppercase mt-0.5 text-slate-600 md:text-blue-100/90">CONSULTORES</div>
+      </a>
+
+      <nav class="hidden md:flex items-center space-x-8">
+        <a href="#" class="nav-link text-white font-medium transition-colors hover:text-brand-orange">Inicio</a>
+        <a href="#servicios" class="nav-link text-white font-medium transition-colors hover:text-brand-orange">Servicios</a>
+        <a href="#certificados" class="nav-link text-white font-medium transition-colors hover:text-brand-orange">Certificados</a>
+        <a href="#nosotros" class="nav-link text-white font-medium transition-colors hover:text-brand-orange">Nosotros</a>
+        <a href="#contacto" class="nav-link text-white font-medium transition-colors hover:text-brand-orange">Contacto</a>
+        <a href="https://aula.proliderconsultores.com/escritorio/" target="_blank" class="bg-brand-orange text-white px-6 py-2 rounded-full font-semibold shadow-lg hover:bg-orange-600 transition-all transform hover:-translate-y-1">Campus Virtual</a>
+      </nav>
+
+      <button id="mobile-toggle" class="md:hidden p-2 text-white">
+        <i class="fa-solid fa-bars text-2xl"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden absolute top-full left-0 right-0 bg-white shadow-xl max-h-0 overflow-hidden transition-all duration-300 border-t">
+      <div class="p-6 flex flex-col space-y-4">
+        <a href="#" class="mobile-link text-slate-600 text-lg font-medium hover:text-brand-blue">Inicio</a>
+        <a href="#servicios" class="mobile-link text-slate-600 text-lg font-medium hover:text-brand-blue">Servicios</a>
+        <a href="#certificados" class="mobile-link text-slate-600 text-lg font-medium hover:text-brand-blue">Certificados</a>
+        <a href="#nosotros" class="mobile-link text-slate-600 text-lg font-medium hover:text-brand-blue">Nosotros</a>
+        <a href="#contacto" class="mobile-link text-slate-600 text-lg font-medium hover:text-brand-blue">Contacto</a>
+        <a href="https://aula.proliderconsultores.com/escritorio/" target="_blank" class="bg-brand-blue text-white px-6 py-3 rounded-xl font-bold text-center">Campus Virtual</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div id="home-view" class="animate-fade-in">
+      <!-- Hero -->
+      <section class="relative min-h-[95vh] flex items-center pt-24 pb-16 overflow-hidden bg-brand-blue">
+        <div class="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat" style="background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2070&auto=format&fit=crop'); background-color: '#00619B'">
+          <div class="absolute inset-0 bg-gradient-to-r from-brand-blue via-brand-blue/85 to-transparent"></div>
+        </div>
+        <div class="container mx-auto px-4 md:px-6 relative z-10 grid lg:grid-cols-2 gap-16 items-center">
+          <div class="text-white space-y-8 animate-fade-in-up">
+            <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20">
+              <span class="w-2 h-2 bg-brand-orange rounded-full animate-pulse"></span>
+              <span class="text-xs font-bold tracking-widest uppercase">Líderes en Capacitación</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-display font-extrabold leading-[1.1]">
+              Los mejores Profesionales en <span class="text-brand-orange">Capacitación</span> Psicológica
+            </h1>
+            <p class="text-xl md:text-2xl text-blue-50 max-w-xl leading-relaxed opacity-90 font-light">
+              Somos la plataforma especializada en Capacitación de Psicología-Educación al alcance de todos. <span class="font-semibold">Transformamos vidas</span>.
+            </p>
+            <div>
+              <a href="https://aula.proliderconsultores.com/escritorio/" target="_blank" class="inline-flex bg-brand-orange hover:bg-orange-600 text-white px-10 py-5 rounded-2xl font-bold text-xl shadow-2xl transition-all items-center space-x-3 group">
+                <span>Sabe más</span>
+                <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-2"></i>
+              </a>
+            </div>
+          </div>
+          <div class="hidden lg:block">
+            <div class="grid grid-cols-2 gap-6 p-4">
+              <div class="h-64 rounded-[2rem] overflow-hidden shadow-2xl bg-cover bg-center translate-y-8" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop')"></div>
+              <div class="h-64 rounded-[2rem] overflow-hidden shadow-2xl bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=600&auto=format&fit=crop')"></div>
+              <div class="h-64 rounded-[2rem] overflow-hidden shadow-2xl bg-cover bg-center translate-y-8" style="background-image: url('https://images.unsplash.com/photo-1544027993-37dbfe43562a?q=80&w=600&auto=format&fit=crop')"></div>
+              <div class="h-64 rounded-[2rem] overflow-hidden shadow-2xl bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=600&auto=format&fit=crop')"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services -->
+      <section id="servicios" class="py-24 bg-white scroll-mt-20">
+        <div class="container mx-auto px-4 md:px-6">
+          <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+            <h2 class="text-brand-blue font-bold tracking-widest uppercase text-sm">Nuestros Servicios</h2>
+            <h3 class="text-3xl md:text-4xl font-display font-extrabold text-slate-900">Soluciones Integrales para tu Desarrollo</h3>
+          </div>
+          <div class="grid md:grid-cols-3 gap-8">
+            <div class="p-8 rounded-3xl border border-slate-100 bg-white shadow-sm hover:shadow-xl transition-all">
+              <div class="w-16 h-16 rounded-2xl bg-blue-100 text-brand-blue flex items-center justify-center text-2xl mb-6">
+                <i class="fa-solid fa-laptop-code"></i>
+              </div>
+              <h4 class="text-xl font-bold mb-4">Clases Online</h4>
+              <p class="text-slate-600">Accede a nuestra plataforma educativa desde cualquier lugar con sesiones en vivo.</p>
+            </div>
+            <div class="p-8 rounded-3xl border border-slate-100 bg-white shadow-sm hover:shadow-xl transition-all">
+              <div class="w-16 h-16 rounded-2xl bg-orange-100 text-brand-orange flex items-center justify-center text-2xl mb-6">
+                <i class="fa-solid fa-user-doctor"></i>
+              </div>
+              <h4 class="text-xl font-bold mb-4">Atención Psicológica</h4>
+              <p class="text-slate-600">Contamos con especialistas en salud mental para brindarte apoyo personalizado.</p>
+            </div>
+            <div class="p-8 rounded-3xl border border-slate-100 bg-white shadow-sm hover:shadow-xl transition-all">
+              <div class="w-16 h-16 rounded-2xl bg-blue-100 text-brand-blue flex items-center justify-center text-2xl mb-6">
+                <i class="fa-solid fa-users-rectangle"></i>
+              </div>
+              <h4 class="text-xl font-bold mb-4">Clases Presenciales</h4>
+              <p class="text-slate-600">Fortalece tus conocimientos con talleres dinámicos en Lince.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Certificates Integrated -->
+      <section id="certificados" class="py-24 bg-slate-50 scroll-mt-20 relative">
+        <div class="container mx-auto px-4 md:px-6 relative z-10">
+          <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-10 space-y-3">
+              <h2 class="text-brand-blue font-bold tracking-widest uppercase text-xs">Consulta de Registros</h2>
+              <h3 class="text-3xl md:text-5xl font-display font-extrabold text-slate-900 leading-tight">Sistema de Certificación</h3>
+              <p class="text-slate-500">Valida tus certificados oficiales emitidos por Prolider Consultores.</p>
+            </div>
+
+            <div class="bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border border-slate-100">
+              <div class="bg-brand-blue p-8 text-white text-center">
+                <h4 class="text-lg font-bold uppercase tracking-wider mb-1">Verificación de Autenticidad</h4>
+                <p class="text-blue-100 text-xs opacity-80">Cumpliendo con los estándares de transparencia del Perú</p>
+              </div>
+
+              <div class="p-6 md:p-12 space-y-8">
+                <div class="flex justify-center" id="system-status-container">
+                  <span class="bg-slate-100 text-slate-500 px-6 py-2 rounded-full text-[10px] font-bold animate-pulse">SINCRONIZANDO...</span>
+                </div>
+
+                <form id="cert-search-form" class="flex flex-col sm:flex-row gap-4">
+                  <div class="flex-grow relative">
+                    <i class="fa-solid fa-key absolute left-5 top-1/2 -translate-y-1/2 text-slate-300"></i>
+                    <input id="cert-input" type="text" placeholder="Ingrese código del documento..." required class="w-full pl-12 pr-6 py-4 rounded-2xl bg-slate-50 border-2 border-slate-100 focus:outline-none focus:border-brand-blue transition-all text-lg font-medium">
+                  </div>
+                  <button type="submit" id="cert-btn" class="bg-brand-blue hover:bg-slate-800 text-white px-8 py-4 rounded-2xl font-bold transition-all shadow-xl flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <span>VALIDAR</span>
+                  </button>
+                </form>
+
+                <div id="cert-results" class="hidden animate-fade-in-up"></div>
+
+                <div class="pt-8 border-t border-slate-100">
+                  <div class="flex items-start space-x-4 p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                    <i class="fa-solid fa-circle-info text-brand-blue mt-1"></i>
+                    <p class="text-[10px] text-slate-500 leading-relaxed text-justify">
+                      <strong>Aviso Legal:</strong> La información contenida en este sistema es confidencial y para fines de validación institucional. Para cualquier rectificación, contactar al área administrativa.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section id="nosotros" class="py-24 bg-white scroll-mt-20">
+        <div class="container mx-auto px-4 md:px-6">
+          <div class="flex flex-col lg:flex-row gap-16 items-center">
+            <div class="w-full lg:w-1/2 grid grid-cols-2 gap-6 relative">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop" class="w-full h-72 object-cover rounded-[2.5rem]" alt="Latina Professional">
+              <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop" class="w-full h-52 object-cover rounded-[2.5rem] mt-12" alt="Team">
+              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-orange px-8 py-6 rounded-[2rem] shadow-2xl border-[6px] border-white text-white text-center min-w-[200px]">
+                <span class="block text-5xl font-extrabold">+10</span>
+                <span class="text-xs font-bold uppercase tracking-wider">Años de experiencia</span>
+              </div>
+            </div>
+            <div class="w-full lg:w-1/2 space-y-8">
+              <h2 class="text-brand-orange font-bold tracking-widest uppercase text-sm">Sobre Nosotros</h2>
+              <h3 class="text-4xl font-display font-extrabold text-slate-900 leading-tight">Expertos en Capacitación de Psicología y Educación</h3>
+              <p class="text-slate-600 text-lg leading-relaxed">En PROLIDER CONSULTORES, creemos que el bienestar mental es el pilar del éxito.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contacto" class="py-24 bg-slate-50 scroll-mt-20">
+        <div class="container mx-auto px-4 md:px-6">
+          <div class="grid lg:grid-cols-2 gap-16">
+            <div class="space-y-8">
+              <h2 class="text-brand-blue font-bold tracking-widest uppercase text-sm">Contáctanos</h2>
+              <h3 class="text-4xl font-display font-extrabold text-slate-900">¿Tienes alguna duda?</h3>
+              <div class="space-y-6">
+                <div class="flex items-center space-x-4">
+                  <i class="fa-solid fa-location-dot text-brand-blue text-xl"></i>
+                  <span>Jiron Belisario Flores 574, Lince, Lima</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                  <i class="fa-solid fa-phone text-brand-blue text-xl"></i>
+                  <span>992046557</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                  <i class="fa-solid fa-envelope text-brand-blue text-xl"></i>
+                  <span>ernesto.emprendedores25@gmail.com</span>
+                </div>
+              </div>
+            </div>
+            <div class="bg-white rounded-[2.5rem] shadow-2xl p-8 border border-slate-100">
+              <form id="contact-form" class="space-y-6">
+                <input type="text" placeholder="Nombre Completo" required class="w-full px-5 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:border-brand-blue transition-all">
+                <input type="tel" placeholder="Teléfono" required class="w-full px-5 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:border-brand-blue transition-all">
+                <textarea placeholder="Mensaje" rows="4" required class="w-full px-5 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:border-brand-blue transition-all resize-none"></textarea>
+                <button type="submit" class="w-full bg-brand-orange text-white py-4 rounded-xl font-bold text-lg hover:bg-orange-600 transition-all shadow-xl">Enviar Mensaje</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-300 pt-20 pb-10 mt-auto">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+        <div class="space-y-6">
+          <a href="#" class="flex flex-col text-left">
+            <div class="flex items-baseline">
+              <span class="font-display font-bold text-3xl tracking-tight leading-none text-white">Pro</span>
+              <span class="font-display font-bold text-3xl tracking-tight leading-none text-brand-orange">lider</span>
+            </div>
+            <div class="text-[10px] font-bold tracking-[0.3em] uppercase mt-0.5 text-blue-200/80">CONSULTORES</div>
+          </a>
+          <p class="text-slate-400">Especialistas en formación humana y profesional en Lima, Perú.</p>
+        </div>
+        <div>
+          <h4 class="text-white font-bold mb-6">Enlaces Rápidos</h4>
+          <ul class="space-y-4">
+            <li><a href="#" class="hover:text-brand-orange transition-colors">Inicio</a></li>
+            <li><a href="#servicios" class="hover:text-brand-orange transition-colors">Servicios</a></li>
+            <li><a href="#certificados" class="hover:text-brand-orange transition-colors">Certificados Oficiales</a></li>
+            <li><a href="#contacto" class="hover:text-brand-orange transition-colors">Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-bold mb-6">Contacto Directo</h4>
+          <p>992046557</p>
+          <p>ernesto.emprendedores25@gmail.com</p>
+        </div>
+      </div>
+      <div class="pt-10 border-t border-slate-800 text-center text-sm text-slate-500">
+        © PROLIDER CONSULTORES. Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <!-- LÓGICA INTEGRADA PARA EVITAR ERRORES DE MIME TYPE EN VPS -->
+  <script type="module">
+    import * as XLSX from 'xlsx';
+
+    const URL_CERTIFICADOS = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSvNLRnNnFr2K8XupkMGL6fqERIJRuLL2HijIViLn8Udah9IpwwuZmkw5hiRjmCb-lJ7rN0JgomCnUY/pub?output=xlsx';
+    const URL_ACTIVACION = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTPlmHnRLdNhhBjN6w1HOJJU5dDm5p9dfNpjwwvmprno-FQcWTq6jy1d2hVmXrl7sJRRIpG42BvBaoj/pub?output=xlsx';
+
+    const header = document.getElementById('main-header');
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+    const systemStatusContainer = document.getElementById('system-status-container');
+    const certForm = document.getElementById('cert-search-form');
+    const certInput = document.getElementById('cert-input');
+    const certResults = document.getElementById('cert-results');
+
+    let systemStatus = 'checking';
+
+    function updateHeaderStyles() {
+      const scrolled = window.scrollY > 20;
+      const logoPro = document.querySelector('.logo-pro');
+      const logoSub = document.querySelector('.logo-sub');
+      const toggleIcon = mobileToggle?.querySelector('i');
+      const desktopLinks = document.querySelectorAll('nav .nav-link');
+
+      if (scrolled) {
+        header?.classList.add('bg-white', 'shadow-md', 'py-2');
+        header?.classList.remove('py-4', 'bg-transparent');
+        logoPro?.classList.add('text-brand-blue');
+        logoPro?.classList.remove('text-white', 'text-slate-800');
+        logoSub?.classList.add('text-brand-blue');
+        logoSub?.classList.remove('text-blue-100/90', 'text-slate-600');
+        toggleIcon?.classList.add('text-brand-blue');
+        toggleIcon?.classList.remove('text-white');
+        desktopLinks.forEach(l => {
+          l.style.color = '#475569';
+        });
+      } else {
+        header?.classList.remove('bg-white', 'shadow-md', 'py-2');
+        header?.classList.add('bg-transparent', 'py-4');
+        logoPro?.classList.remove('text-brand-blue');
+        logoPro?.classList.add('md:text-white', 'text-slate-800');
+        logoSub?.classList.remove('text-brand-blue');
+        logoSub?.classList.add('md:text-blue-100/90', 'text-slate-600');
+        toggleIcon?.classList.remove('text-brand-blue');
+        toggleIcon?.classList.add('text-white');
+        desktopLinks.forEach(l => {
+          l.style.color = '#ffffff';
+        });
+      }
+    }
+
+    window.addEventListener('scroll', updateHeaderStyles);
+
+    mobileToggle?.addEventListener('click', () => {
+      if (mobileMenu?.classList.contains('max-h-0')) {
+        mobileMenu.classList.replace('max-h-0', 'max-h-96');
+      } else {
+        mobileMenu?.classList.replace('max-h-96', 'max-h-0');
+      }
+    });
+
+    async function fetchWithRetry(url, retries = 2, timeout = 7000) {
+      for (let i = 0; i < retries; i++) {
+        try {
+          const controller = new AbortController();
+          const id = setTimeout(() => controller.abort(), timeout);
+          const response = await fetch(url, { signal: controller.signal, mode: 'cors', cache: 'no-store' });
+          clearTimeout(id);
+          if (response.ok) return response;
+        } catch (err) {
+          if (i === retries - 1) throw err;
+          await new Promise(r => setTimeout(r, 1000));
+        }
+      }
+      throw new Error("Conexión fallida");
+    }
+
+    async function checkVigencia() {
+      try {
+        const res = await fetchWithRetry(URL_ACTIVACION);
+        const ab = await res.arrayBuffer();
+        const wb = XLSX.read(new Uint8Array(ab), { type: 'array', cellDates: true });
+        const data = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { header: 1 });
+        
+        const fechaVencimiento = new Date(data[1][2]);
+        const hoy = new Date();
+        hoy.setHours(0,0,0,0);
+        fechaVencimiento.setHours(0,0,0,0);
+
+        if (hoy <= fechaVencimiento) {
+          systemStatus = 'active';
+          if (systemStatusContainer) {
+            systemStatusContainer.innerHTML = `<span class="bg-green-100 text-green-700 border border-green-200 px-6 py-2 rounded-full text-[10px] font-bold">SISTEMA SINCRONIZADO</span>`;
+          }
+        } else {
+          systemStatus = 'expired';
+          renderSystemOff("LICENCIA EXPIRADA");
+        }
+      } catch (e) {
+        systemStatus = 'error';
+        renderSystemOff("ERROR DE CONEXIÓN");
+      }
+    }
+
+    function renderSystemOff(motivo) {
+      if (systemStatusContainer) {
+        systemStatusContainer.innerHTML = `<span class="bg-red-50 text-red-600 border border-red-100 px-6 py-2 rounded-full text-[10px] font-bold">${motivo}</span>`;
+      }
+      const btn = document.getElementById('cert-btn');
+      if (btn) btn.disabled = true;
+    }
+
+    certForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (systemStatus !== 'active') return;
+
+      const codigo = certInput.value.trim().toLowerCase();
+      const btn = document.getElementById('cert-btn');
+      btn.innerHTML = '<i class="fa-solid fa-circle-notch animate-spin"></i><span>BUSCANDO...</span>';
+      btn.disabled = true;
+
+      try {
+        const res = await fetchWithRetry(URL_CERTIFICADOS);
+        const ab = await res.arrayBuffer();
+        // IMPORTANTE: Se agregó cellDates: true para que Excel convierta los números seriales en objetos Date
+        const wb = XLSX.read(new Uint8Array(ab), { type: 'array', cellDates: true });
+        const data = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
+        
+        if (!data || data.length === 0) throw new Error("Base de datos vacía");
+
+        const headers = Object.keys(data[0]);
+        const registro = data.find(r => String(r[headers[0]]).toLowerCase() === codigo);
+
+        if (certResults) {
+          certResults.classList.remove('hidden');
+          if (registro) {
+            let rows = '';
+            for (let i = 1; i <= 6; i++) {
+              const h = headers[i] || 'Campo';
+              let v = registro[h] || '---';
+              
+              // Verificamos si el valor es una instancia de Date para formatearlo correctamente
+              if (v instanceof Date) {
+                // Formato DD/MM/YYYY
+                v = v.toLocaleDateString('es-PE', {
+                  day: '2-digit',
+                  month: '2-digit',
+                  year: 'numeric'
+                });
+              } else if (typeof v === 'number' && v > 40000) {
+                 // Fallback por si la librería no lo convirtió: conversión manual de serial de Excel
+                 const dateObj = new Date((v - 25569) * 86400 * 1000);
+                 v = dateObj.toLocaleDateString('es-PE', {
+                  day: '2-digit',
+                  month: '2-digit',
+                  year: 'numeric'
+                });
+              }
+              
+              rows += `<div class="border-b border-slate-100 pb-2"><span class="block text-[9px] uppercase font-bold text-slate-400 tracking-widest mb-1">${h}</span><span class="block font-bold text-slate-700">${v}</span></div>`;
+            }
+            certResults.innerHTML = `<div class="bg-brand-blue/[0.02] border border-brand-blue/10 rounded-3xl p-6 md:p-10 space-y-8 mt-8 animate-fade-in-up"><div class="flex items-center space-x-4"><div class="w-12 h-12 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center text-xl"><i class="fa-solid fa-shield-check"></i></div><div><h5 class="text-xl font-bold text-slate-900">Documento Verificado</h5><p class="text-green-600 text-xs font-bold uppercase tracking-widest">Información Oficial Confirmada</p></div></div><div class="grid sm:grid-cols-2 gap-x-10 gap-y-6">${rows}</div></div>`;
+          } else {
+            certResults.innerHTML = `<div class="bg-white border border-red-100 rounded-3xl p-8 text-center space-y-4 mt-8 animate-fade-in-up"><div class="w-16 h-16 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto text-2xl"><i class="fa-solid fa-search-minus"></i></div><h5 class="text-xl font-bold text-red-900 uppercase">Sin coincidencias</h5><p class="text-slate-500 text-sm">El código no figura en nuestra base de datos oficial.</p></div>`;
+          }
+        }
+      } catch (err) {
+        console.error("Error en búsqueda:", err);
+        alert("Error de conexión con la base de datos.");
+      } finally {
+        btn.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i><span>VALIDAR</span>';
+        btn.disabled = false;
+      }
+    });
+
+    checkVigencia();
+    updateHeaderStyles();
+  </script>
+<script type="module" src="/index.tsx"></script>
+</body>
 </html>

@@ -52,7 +52,7 @@ export const Hero: React.FC = () => {
         <div className="text-white space-y-8 animate-fade-in-up">
           <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20">
             <span className="w-2 h-2 bg-brand-orange rounded-full animate-pulse"></span>
-            <span className="text-xs font-bold tracking-widest uppercase">Líderes en Capacitación 2024</span>
+            <span className="text-xs font-bold tracking-widest uppercase">Líderes en Capacitación</span>
           </div>
           
           <h1 className="text-5xl md:text-7xl font-display font-extrabold leading-[1.1]">
@@ -69,7 +69,7 @@ export const Hero: React.FC = () => {
 
           <div className="flex flex-col sm:flex-row gap-4">
             <a 
-              href={`https://wa.me/51${BRAND.contact.phone}`}
+              href="https://aula.proliderconsultores.com/escritorio/"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-brand-orange hover:bg-orange-600 text-white px-10 py-5 rounded-2xl font-bold text-xl shadow-2xl shadow-orange-900/30 transition-all flex items-center justify-center space-x-3 group"
