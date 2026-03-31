@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { BRAND } from '../constants';
+import { ObfuscatedEmail } from './ObfuscatedEmail';
 
 interface FooterProps {
   navigateTo: (view: 'home' | 'certificates') => void;
@@ -69,7 +70,9 @@ export const Footer: React.FC<FooterProps> = ({ navigateTo }) => {
               </li>
               <li className="flex items-center space-x-3 text-sm">
                  <i className="fa-solid fa-envelope text-brand-orange"></i>
-                 <span className="break-all">{BRAND.contact.email}</span>
+                 <span className="break-all">
+                   <ObfuscatedEmail user={BRAND.contact.emailUser} domain={BRAND.contact.emailDomain} className="hover:text-brand-orange" />
+                 </span>
               </li>
             </ul>
           </div>

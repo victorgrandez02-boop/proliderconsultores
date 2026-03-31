@@ -6,7 +6,8 @@ export const BRAND = {
   contact: {
     phone: "992046557",
     address: "Jiron Belisario Flores 574, Lince",
-    email: "ernesto.emprendedores25@gmail.com",
+    emailUser: "ernesto.emprendedores25",
+    emailDomain: "gmail.com",
     city: "Lima, Perú"
   }
 };
